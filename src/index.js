@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import DashboardPage from "./pages/DashboardPage";
+import EmailSendPage from "./pages/EmailSendPage";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+function App() {
+  const [page, setPage] = useState("register");
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  const navigate = (p) => setPage(p);
+
+  return (
+    <>
+      {page === "register"  && <RegisterPage       onNavigate={navigate} />}
+      {page === "login"     && <LoginPage           onNavigate={navigate} />}
+      {page === "forgot"    && <ForgotPasswordPage  onNavigate={navigate} />}
+      {page === "reset"     && <ResetPasswordPage   onNavigate={navigate} />}
+      {page === "dashboard" && <DashboardPage       onNavigate={navigate} />}
+      {page === "email"     && <EmailSendPage       onNavigate={navigate} />}
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
