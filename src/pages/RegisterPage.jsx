@@ -24,7 +24,7 @@ export default function RegisterPage({ onNavigate }) {
     userName: "",
     userOfficialEmail: "",
     password: "",
-    role: "DEVELOPER",
+    role: "ADMIN",
   });
   const [status, setStatus] = useState({ type: "", msg: "" });
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,7 @@ export default function RegisterPage({ onNavigate }) {
       localStorage.setItem("user_role", form.role);
       localStorage.setItem("user_email", form.userOfficialEmail);
       setStatus({ type: "ok", msg: data.message || "Registered successfully!" });
-      setTimeout(() => onNavigate("dashboard"), 1200);
+      setTimeout(() => onNavigate("/dashboard"), 1200);
     } catch (err) {
       setStatus({ type: "err", msg: err.message });
     } finally {
@@ -61,11 +61,9 @@ export default function RegisterPage({ onNavigate }) {
         <div style={styles.leftInner}>
           <div style={styles.brand}>
             <span style={styles.brandIcon}>⬡</span>
-            <span style={styles.brandName}>TaskForge</span>
+            <span style={styles.brandName}>TMT</span>
           </div>
-          <h1 style={styles.headline}>Build.<br />Track.<br />Ship.</h1>
-          <p style={styles.sub}>A task management system with role-based access control. Register to get your JWT token and start managing issues.</p>
-
+          <h1 style={styles.headline}>Task<br />Management<br />Tool.</h1>
           {/* Live Role Preview — teaches what roles do */}
           <div style={styles.roleBox}>
             <div style={styles.roleBoxTitle}>Role Preview: <strong>{form.role}</strong></div>
@@ -84,7 +82,7 @@ export default function RegisterPage({ onNavigate }) {
           <h2 style={styles.formTitle}>Create Account</h2>
           <p style={styles.formSub}>
             Already have an account?{" "}
-            <button onClick={() => onNavigate("login")} style={styles.link}>Sign in</button>
+            <button onClick={() => onNavigate("/login")} style={styles.link}>Sign in</button>
           </p>
 
           <form onSubmit={handleSubmit} style={styles.form}>
@@ -153,12 +151,7 @@ export default function RegisterPage({ onNavigate }) {
               {loading ? "Registering…" : "Register & Get Token →"}
             </button>
           </form>
-
-          {/* Backend endpoint hint for learning */}
-          <div style={styles.endpointHint}>
-            <span style={styles.method}>POST</span>
-            <code style={styles.endpoint}>/api/auth/register</code>
-          </div>
+          
         </div>
       </div>
     </div>

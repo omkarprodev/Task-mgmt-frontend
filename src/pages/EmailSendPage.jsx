@@ -53,7 +53,7 @@ export default function EmailSendPage({ onNavigate }) {
   return (
     <div style={styles.page}>
       <div style={styles.header}>
-        <button onClick={() => onNavigate("dashboard")} style={styles.back}>← Dashboard</button>
+        <button onClick={() => onNavigate("/dashboard")} style={styles.back}>← Dashboard</button>
         <div style={styles.brand}>
           <span style={styles.brandIcon}>⬡</span>
           <span style={styles.brandName}>TaskForge</span>

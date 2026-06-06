@@ -25,10 +25,11 @@ export default function LoginPage({ onNavigate }) {
     setLoading(true);
     try {
       // Sends LoginRequestDTO — backend checks BCrypt hash
-      const msg = await loginUser(form);
-      setStatus({ type: "ok", msg });
+      const data = await loginUser(form);
+      setStatus({ type: "ok", msg: data.message });
+      localStorage.setItem("jwt_token", data.token);      // ← save token
       localStorage.setItem("user_email", form.userOfficialEmail);
-      setTimeout(() => onNavigate("dashboard"), 1000);
+      setTimeout(() => onNavigate("/dashboard"), 1000);
     } catch (err) {
       setStatus({ type: "err", msg: err.message || "Invalid credentials" });
     } finally {
@@ -99,7 +100,7 @@ export default function LoginPage({ onNavigate }) {
 
             <button
               type="button"
-              onClick={() => onNavigate("forgot")}
+              onClick={() => onNavigate("/forgot")}
               style={styles.forgotLink}
             >
               Forgot password?
@@ -122,31 +123,13 @@ export default function LoginPage({ onNavigate }) {
 
           <div style={styles.divider}><span>or</span></div>
 
-          <button onClick={() => onNavigate("register")} style={styles.registerBtn}>
+          <button onClick={() => onNavigate("/register")} style={styles.registerBtn}>
             Create new account
           </button>
         </div>
 
-        {/* Flow diagram — shows what happens on backend */}
-        <div style={styles.flowBox}>
-          <div style={styles.flowTitle}>🔍 What happens on login</div>
-          <div style={styles.flow}>
-            <FlowStep color="#7fffb2" label="1" text="UserAuthService.login()" />
-            <Arrow />
-            <FlowStep color="#60afff" label="2" text="findByUserOfficialEmail()" />
-            <Arrow />
-            <FlowStep color="#ffb347" label="3" text="BCrypt.matches()" />
-            <Arrow />
-            <FlowStep color="#ff80ab" label="4" text="JWTUtil.generateToken()" />
-          </div>
-        </div>
 
-        {/* Endpoint badge */}
-        <div style={styles.endpointRow}>
-          <span style={styles.methodBadge}>POST</span>
-          <code style={styles.endpoint}>/api/auth/login</code>
-          <span style={styles.returns}>→ "Login Successful"</span>
-        </div>
+
       </div>
     </div>
   );

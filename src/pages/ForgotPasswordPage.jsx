@@ -34,7 +34,7 @@ export default function ForgotPasswordPage({ onNavigate }) {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        <button onClick={() => onNavigate("login")} style={styles.back}>← Back to login</button>
+        <button onClick={() => onNavigate("/login")} style={styles.back}>← Back to login</button>
 
         {!sent ? (
           <>
@@ -71,17 +71,7 @@ export default function ForgotPasswordPage({ onNavigate }) {
               </button>
             </form>
 
-            {/* Backend logic explainer */}
-            <div style={styles.explainer}>
-              <div style={styles.explainerTitle}>⚙ Backend Flow (UserAuthService.java)</div>
-              <div style={styles.steps}>
-                <Step n="1" text="findByUserOfficialEmail(email)" color="#60afff" />
-                <Step n="2" text="UUID.randomUUID() → resetToken" color="#7fffb2" />
-                <Step n="3" text="Expiry = now + 15 minutes" color="#ffb347" />
-                <Step n="4" text="userRepo.save(user)" color="#c084fc" />
-                <Step n="5" text="emailService.sendResetPasswordEmail()" color="#f472b6" />
-              </div>
-            </div>
+
           </>
         ) : (
           // Success state
@@ -98,7 +88,7 @@ export default function ForgotPasswordPage({ onNavigate }) {
                 http://localhost:7676/auth/reset-password?token=<span style={{ color: "#7fffb2" }}>{"<UUID>"}</span>
               </code>
             </div>
-            <button onClick={() => onNavigate("reset")} style={styles.btn}>
+            <button onClick={() => onNavigate("/reset")} style={styles.btn}>
               Enter Reset Token →
             </button>
             <button onClick={() => { setSent(false); setEmail(""); }} style={styles.retryBtn}>
@@ -106,11 +96,6 @@ export default function ForgotPasswordPage({ onNavigate }) {
             </button>
           </div>
         )}
-
-        <div style={styles.endpointHint}>
-          <span style={styles.methodBadge}>POST</span>
-          <code style={styles.ep}>/api/auth/forgot_password?email={"{email}"}</code>
-        </div>
       </div>
     </div>
   );

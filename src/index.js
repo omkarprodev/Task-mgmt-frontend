@@ -1,28 +1,40 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import DashboardPage from "./pages/DashboardPage";
 import EmailSendPage from "./pages/EmailSendPage";
+import UserProfilePage from "./pages/UserProfilePage";
 
+// ─────────────────────────────────────────
+// useNavigate() = React Router hook
+// Replaces our manual onNavigate prop system
+// Now URL changes when you switch pages
+// ─────────────────────────────────────────
 function App() {
-  const [page, setPage] = useState("register");
-
-  const navigate = (p) => setPage(p);
+  const navigate = useNavigate();
 
   return (
-    <>
-      {page === "register"  && <RegisterPage       onNavigate={navigate} />}
-      {page === "login"     && <LoginPage           onNavigate={navigate} />}
-      {page === "forgot"    && <ForgotPasswordPage  onNavigate={navigate} />}
-      {page === "reset"     && <ResetPasswordPage   onNavigate={navigate} />}
-      {page === "dashboard" && <DashboardPage       onNavigate={navigate} />}
-      {page === "email"     && <EmailSendPage       onNavigate={navigate} />}
-    </>
+      <Routes>
+        <Route path="/"          element={<RegisterPage    onNavigate={navigate} />} />
+        <Route path="/register"  element={<RegisterPage    onNavigate={navigate} />} />
+        <Route path="/login"     element={<LoginPage       onNavigate={navigate} />} />
+        <Route path="/forgot"    element={<ForgotPasswordPage onNavigate={navigate} />} />
+        <Route path="/reset"     element={<ResetPasswordPage  onNavigate={navigate} />} />
+        <Route path="/dashboard" element={<DashboardPage   onNavigate={navigate} />} />
+        <Route path="/email"     element={<EmailSendPage   onNavigate={navigate} />} />
+        <Route path="/profile"   element={<UserProfilePage onNavigate={navigate} />} />
+      </Routes>
   );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+);

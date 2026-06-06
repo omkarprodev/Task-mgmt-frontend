@@ -40,7 +40,7 @@ export async function loginUser(data) {
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error(await res.text());
-  return res.text(); // returns "Login Successful"
+  return res.json(); // now returns { token, message }
 }
 
 // ─── POST /api/auth/forgot_password?email= ─────────

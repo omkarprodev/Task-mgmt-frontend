@@ -43,7 +43,7 @@ export default function ResetPasswordPage({ onNavigate }) {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        <button onClick={() => onNavigate("forgot")} style={styles.back}>← Back</button>
+        <button onClick={() => onNavigate("/forgot")} style={styles.back}>← Back</button>
 
         {!done ? (
           <>
@@ -132,31 +132,16 @@ export default function ResetPasswordPage({ onNavigate }) {
               </button>
             </form>
 
-            {/* Backend logic explainer */}
-            <div style={styles.explainer}>
-              <div style={styles.explainerTitle}>⚙ resetPassword() logic</div>
-              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", lineHeight: 1.8, fontFamily: "monospace" }}>
-                <div><span style={{ color: "#7fffb2" }}>if</span> (expiry.before(new Date())) → throw "Token expired"</div>
-                <div>passwordEncoder.encode(newPassword)</div>
-                <div>user.setResetToken(<span style={{ color: "#ffb347" }}>null</span>)</div>
-                <div>user.setResetTokenExpiry(<span style={{ color: "#ffb347" }}>null</span>)</div>
-                <div>userRepo.save(user)</div>
-              </div>
-            </div>
+
           </>
         ) : (
           <div style={{ textAlign: "center" }}>
             <div style={{ fontSize: 64, marginBottom: 20 }}>✅</div>
             <h2 style={styles.title}>Password Reset!</h2>
             <p style={styles.sub}>Your password has been updated. The reset token has been cleared from the database.</p>
-            <button onClick={() => onNavigate("login")} style={styles.btn}>Go to Login →</button>
+            <button onClick={() => onNavigate("/login")} style={styles.btn}>Go to Login →</button>
           </div>
         )}
-
-        <div style={styles.epRow}>
-          <span style={styles.epBadge}>POST</span>
-          <code style={styles.ep}>/api/auth/reset_password?token={"{"}&{"}"}newPassword={"{"}&{"}"}</code>
-        </div>
       </div>
     </div>
   );
