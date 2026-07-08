@@ -9,6 +9,8 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import DashboardPage from "./pages/DashboardPage";
 import EmailSendPage from "./pages/EmailSendPage";
 import UserProfilePage from "./pages/UserProfilePage";
+import IssuesPage from "./pages/IssuesPage";
+import SprintsPage from "./pages/SprintsPage";
 
 // ─────────────────────────────────────────
 // useNavigate() = React Router hook
@@ -28,6 +30,8 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage   onNavigate={navigate} />} />
         <Route path="/email"     element={<EmailSendPage   onNavigate={navigate} />} />
         <Route path="/profile"   element={<UserProfilePage onNavigate={navigate} />} />
+        <Route path="/issues"    element={<IssuesPage      onNavigate={navigate} />} />
+        <Route path="/sprints"   element={<SprintsPage     onNavigate={navigate} />} />
       </Routes>
   );
 }

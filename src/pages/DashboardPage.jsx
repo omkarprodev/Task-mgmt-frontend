@@ -60,6 +60,8 @@ export default function DashboardPage({ onNavigate }) {
               {[
                 { id: "overview", icon: "🏠", label: "Overview" },
                 { id: "permissions", icon: "🛡", label: "Permissions" },
+                { id: "issues-nav", icon: "🐞", label: "Issues" },
+                { id: "sprints-nav", icon: "🏃", label: "Sprints" },
                 { id: "profile-nav", icon: "👤", label: "My Profile" },
               ].map(item => (
                   <button
@@ -67,6 +69,10 @@ export default function DashboardPage({ onNavigate }) {
                       onClick={() => {
                         if (item.id === "profile-nav") {
                           onNavigate("/profile");
+                        } else if (item.id === "issues-nav") {
+                          onNavigate("/issues");
+                        } else if (item.id === "sprints-nav") {
+                          onNavigate("/sprints");
                         } else {
                           setActiveTab(item.id);
                         }
